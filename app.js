@@ -14,7 +14,7 @@ let dayName = date.toLocaleString(lang, {
 
 dayTitle.innerHTML = dayName;
 
-let listLenght = list.lenght;
+let listLenght = list.length;
 
 const generateTempalate = (todo) => {
   const html = `<li>
@@ -35,6 +35,12 @@ function addTodos(e) {
     listLenght = listLenght + 1;
     generateTempalate(todo);
     submitForm.reset();
+  }
+  if (e.lenght > 20){
+    todo += minFifth(e.substring(51));  
+    return e.substring(0,50);
+    } else {
+    return e;
   }
 }
 
