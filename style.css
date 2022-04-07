@@ -231,7 +231,7 @@ textarea {
 
 .container {
   height: 220px;
-  overflow: auto;
+  overflow-x: auto;
 }
 .container::-webkit-scrollbar {
   width: 10px;
