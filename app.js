@@ -4,9 +4,6 @@ const todoList = document.querySelector(".todos");
 const list = document.querySelectorAll(".todos li");
 const dayTitle = document.querySelector("#dayName");
 
-const TODOS_KEY = "todos";
-let todos = [];
-
 const lang = navigator.language;
 
 let date = new Date();
@@ -18,6 +15,9 @@ let dayName = date.toLocaleString(lang, {
 dayTitle.innerHTML = dayName;
 
 let listLenght = list.length;
+
+const TODOS_KEY = "todos";
+let todos = [];
 
 function saveToDos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
@@ -44,14 +44,19 @@ function addTodos(e) {
     listLenght = listLenght + 1;
     generateTempalate(todo);
     submitForm.reset();
+    todos.push(todo);
+    saveToDos();
   }
   if (e.lenght > 20){
-    todo += minFifth(e.substring(51));  
+    todo += minFifth(e.substring(51));
+    todos.push(todo);
+    saveToDos();
     return e.substring(0,50);
     } else {
+      todos.push(todo);
+      saveToDos();
     return e;
   }
-  saveToDos();
 }
 
 submitForm.addEventListener("submit", addTodos);
