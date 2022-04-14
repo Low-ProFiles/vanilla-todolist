@@ -33,7 +33,7 @@ const generateTempalate = (todo) => {
                   <i class="far fa-trash-alt delete"></i>
                 </li>`;
   todoList.innerHTML += html;
-  todos.push(html);
+  todos.push(todo.text);
   saveToDos();
 };
 
@@ -47,14 +47,10 @@ function addTodos(e) {
     todos.push(todo);
     saveToDos();
   }
-  if (e.lenght > 20){
+  if (e.lenght > 20) {
     todo += minFifth(e.substring(51));
-    todos.push(todo);
-    saveToDos();
-    return e.substring(0,50);
-    } else {
-      todos.push(todo);
-      saveToDos();
+    return e.substring(0, 50);
+  } else {
     return e;
   }
 }
@@ -66,7 +62,7 @@ function deleteTodos(e) {
   if (e.target.classList.contains("delete")) {
     e.target.parentElement.remove();
   }
-  const cleanToDos = todos.filter(function (toDo) { 
+  const cleanToDos = todos.filter(function (toDo) {
     return toDo.id !== parseInt(li.id);
   });
   todos = cleanToDos; // 추출된 내용을 toDos에 넣음
@@ -74,3 +70,10 @@ function deleteTodos(e) {
 }
 
 todoList.addEventListener("click", deleteTodos);
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if (savedToDos !== null) {
+  const parsedToDos = JSON.parse(savedToDos);
+  console.log(parsedToDos);
+}
